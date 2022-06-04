@@ -12,9 +12,21 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
   console.log("[SW] chrome.webNavigation.onCompleted", details.url);
   const data = await fetchAPI(details.url);
   console.log("[SW] chrome.webNavigation.onCompleted", data);
+  const response = await fetch("https://earnest-palmier-0fac39.netlify.app/api/pages");
+  const urlList = await response.json();
   
 
   if (data !== null && typeof data === "object" ) {
+    console.log("🚀 ~ file: worker.ts ~ line 20 ~ chrome.webNavigation.onCompleted.addListener ~ urlList", urlList)
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      const msg = {
+        data: JSON.stringify(urlList)
+      }
+      if (message === 'get-domain-list') {
+        sendResponse(msg);
+      }
+    });
+
     if (data.flag === "green") return
 
     const injectToast = data.flag === "red" ? injectRedToast : injectOrangeToast;
@@ -29,7 +41,6 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 });
 
 async function fetchAPI(pageUrl: string) {
-  console.log(pageUrl)
   const encodedUrl = encodeURIComponent(pageUrl[pageUrl.length-1] === '/' ? [...pageUrl].splice(0, pageUrl.length-1).join('') : pageUrl);
   const url = `https://earnest-palmier-0fac39.netlify.app/api/pages/${encodedUrl}`;
   const response = await fetch(url);
@@ -105,22 +116,6 @@ function injectRedToast() {
   function hideToastHandler() {
       toast.style.display = "none";
   }
-
-  // async function checkSiteAnchors() {
-  //   // const response = await fetch("https://earnest-palmier-0fac39.netlify.app/api/pages");
-  //   // const data = await response.json();
-  //   // console.log(data);
-  //   // const anchorList = document.querySelectorAll("a");
-  //   // const domainList;
-  
-  //   // [...anchorList].find(anchor => {
-  //   //   domainList.forEach(domain => {
-  
-  //   //   })
-  //   // })
-  // }
-
-  // checkSiteAnchors();
 }
 
 function injectOrangeToast() {
