@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": "last 1 safari version"
+        },
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/preset-typescript",
+    "@babel/preset-react"
+  ]
+}
