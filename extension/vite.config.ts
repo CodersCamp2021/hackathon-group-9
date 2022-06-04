@@ -8,6 +8,7 @@ export default defineConfig({
       input: {
         main: "index.html",
         worker: "./src/worker.ts",
+        content: "./src/content.ts"
       },
       output: {
         entryFileNames: (info) =>
