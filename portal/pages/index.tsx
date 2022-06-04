@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react"
 import styles from "../styles/Home.module.css";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -31,7 +31,10 @@ const data = [
 ]
 
 const Home = () => {
+  const [webUrl, setWebUrl] = useState('')
 
+  const filtered = data.filter((item) => item.url === webUrl)
+  const items = filtered.length ? filtered : data
 
   return (
     <>
@@ -42,16 +45,16 @@ const Home = () => {
       maxWidth: '100%',
     }}
   >
-    <TextField fullWidth label="Search" id="fullWidth" />
+    <TextField fullWidth label="Search" id="fullWidth" onChange={e => setWebUrl(e.target.value)} />
   </Box>
   <Button variant="text">Search</Button>
   </div>
 
 <div className={styles.items}>
   <div className={styles.itemContainer}>
-      {data.map((el) => {
+      {items.map((el) => {
         return(
-          <div className={styles.itemWrapper} key={el.toString()}>
+          <div className={styles.itemWrapper} key={el.url}>
             <Item  time={el.createdAt} url={el.url} upvotes={el.upvotes} downvotes={el.downvotes} ></Item>
           </div>
         )
