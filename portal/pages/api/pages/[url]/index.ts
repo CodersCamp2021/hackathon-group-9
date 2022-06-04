@@ -6,9 +6,13 @@ type Error = {
   error: string;
 };
 
+type Data = Page & {
+  flag?: "green" | "orange" | "red";
+};
+
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Page | Error>
+  res: NextApiResponse<Data | Error>
 ) {
   const url = decodeURIComponent(req.query.url as string);
   const page = await prisma.page.findUnique({ where: { url } });
@@ -19,7 +23,23 @@ export default async function handler(
   }
 
   if (req.method === "GET") {
-    res.status(200).send(page);
+    let flag: Data["flag"] = "green";
+
+    if (page.upvotes + page.downvotes >= 5) {
+      const rate = page.downvotes / page.upvotes;
+
+      if (rate >= 1) {
+        flag = "orange";
+      }
+      if (rate >= 3) {
+        flag = "red";
+      }
+    }
+
+    res.status(200).send({
+      ...page,
+      flag,
+    });
     return;
   }
 
