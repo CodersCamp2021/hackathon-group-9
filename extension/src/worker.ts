@@ -15,11 +15,15 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
   
 
   if (data !== null && typeof data === "object" ) {
+    if (data.flag === "green") return
+
+    const injectToast = data.flag === "red" ? injectRedToast : injectOrangeToast;
+
     chrome.scripting.executeScript({
       target: {
         tabId: details.tabId,
       },
-      func: injectRedToast
+      func: injectToast
     })
   }
 });
@@ -64,7 +68,7 @@ function injectRedToast() {
           align-items: center;
           color: white;
           font-family: sans-serif;
-          padding: 15px;
+          padding: 30px;
           box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
       }
 
@@ -146,7 +150,7 @@ function injectOrangeToast() {
           align-items: center;
           color: white;
           font-family: sans-serif;
-          padding: 15px;
+          padding: 30px;
           box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
       }
 
