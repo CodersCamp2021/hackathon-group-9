@@ -1,14 +1,10 @@
-import { Page } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getFlag } from "../../../../lib/flag";
 import { prisma } from "../../../../lib/prisma";
-
-type Error = {
-  error: string;
-};
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Page | Error>
+  res: NextApiResponse
 ) {
   if (req.method === "POST") {
     const url = decodeURIComponent(req.query.url as string);
@@ -23,7 +19,7 @@ export default async function handler(
       where: { id: page.id },
       data: { downvotes: page.downvotes + 1 },
     });
-    res.status(202).send(updatedPage);
+    res.status(202).send({ ...updatedPage, flag: getFlag(updatedPage) });
 
     return;
   }

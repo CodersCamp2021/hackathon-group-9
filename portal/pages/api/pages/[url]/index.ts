@@ -1,18 +1,10 @@
-import { Page } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getFlag } from "../../../../lib/flag";
 import { prisma } from "../../../../lib/prisma";
-
-type Error = {
-  error: string;
-};
-
-type Data = Page & {
-  flag?: "green" | "orange" | "red";
-};
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data | Error>
+  res: NextApiResponse
 ) {
   const url = decodeURIComponent(req.query.url as string);
   const page = await prisma.page.findUnique({ where: { url } });
@@ -23,23 +15,7 @@ export default async function handler(
   }
 
   if (req.method === "GET") {
-    let flag: Data["flag"] = "green";
-
-    if (page.upvotes + page.downvotes >= 5) {
-      const rate = page.downvotes / page.upvotes;
-
-      if (rate >= 1) {
-        flag = "orange";
-      }
-      if (rate >= 3) {
-        flag = "red";
-      }
-    }
-
-    res.status(200).send({
-      ...page,
-      flag,
-    });
+    res.status(200).send({ ...page, flag: getFlag(page) });
     return;
   }
 
@@ -56,7 +32,7 @@ export default async function handler(
       },
     });
 
-    res.status(202).send(updatedPage);
+    res.status(202).send({ ...updatedPage, flag: getFlag(updatedPage) });
   }
 
   if (req.method === "DELETE") {
