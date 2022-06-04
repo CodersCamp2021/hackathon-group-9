@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "manifest_version": 3,
+  "name": "Hackathon",
+  "description": "Chrome extension",
+  "permissions": ["storage", "tabs", "activeTab", "scripting", "webNavigation"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "worker.js"
+  }
+}
