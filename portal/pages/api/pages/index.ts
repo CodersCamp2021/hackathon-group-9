@@ -1,18 +1,16 @@
-import { Page } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getFlag } from "../../../lib/flag";
 import { prisma } from "../../../lib/prisma";
-
-type Error = {
-  error: string;
-};
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Page[] | Page | Error>
+  res: NextApiResponse
 ) {
   if (req.method === "GET") {
     const pages = await prisma.page.findMany();
-    res.status(200).send(pages);
+    res
+      .status(200)
+      .send(pages.map((page) => ({ ...page, flag: getFlag(page) })));
     return;
   }
 
