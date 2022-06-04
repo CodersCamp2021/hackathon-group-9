@@ -1,10 +1,4 @@
 
-.test{ 
-  width: 100px;
-  height: 100px;
-  background-color: red;
-}
-
 .items {
   width: 100%;
   display: flex;
@@ -37,6 +31,29 @@
   display: flex;
   justify-content: space-around;
   /* padding: 10px; */
+}
+
+.addIcon {
+  font-size: 36px;
+  margin-right: 10px;
+  color: lightblue;
+}
+
+.plusBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header {
+  text-align: center;
+}
+
+.btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 

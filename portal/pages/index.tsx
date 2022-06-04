@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Item from '../components/item'
+import { Icon } from '@iconify/react';
+import Modal from "../components/modal";
 
 const data = [
  {
@@ -32,13 +34,26 @@ const data = [
 
 const Home = () => {
   const [webUrl, setWebUrl] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
 
   const filtered = data.filter((item) => item.url === webUrl)
   const items = filtered.length ? filtered : data
 
   return (
     <>
+    
+    <Modal isOpen={isOpen}  onClose={() => setIsOpen(false)}>
+      <h1 className={styles.header}>Report a website</h1>
+      <TextField fullWidth label="URL" id="fullWidth" />
+      <div className={styles.btnContainer}>
+        <Button variant="contained">Submit</Button>
+      </div>
+    </Modal>
+
     <div className={styles.container}>
+    <button className={styles.plusBtn} onClick={() => setIsOpen(true)}>
+        <Icon icon="akar-icons:circle-plus-fill" className={styles.addIcon} />
+    </button>
     <Box
     sx={{
       width: 500,
