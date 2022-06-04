@@ -1,10 +1,9 @@
 import * as React from "react";
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Item from '../components/item'
 
 const data = [
  {
@@ -32,7 +31,10 @@ const data = [
 ]
 
 const Home = () => {
+
+
   return (
+    <>
     <div className={styles.container}>
     <Box
     sx={{
@@ -42,7 +44,22 @@ const Home = () => {
   >
     <TextField fullWidth label="Search" id="fullWidth" />
   </Box>
+  <Button variant="text">Search</Button>
   </div>
+
+<div className={styles.items}>
+  <div className={styles.itemContainer}>
+      {data.map((el) => {
+        return(
+          <div className={styles.itemWrapper} key={el.toString()}>
+            <Item  time={el.createdAt} url={el.url} upvotes={el.upvotes} downvotes={el.downvotes} ></Item>
+          </div>
+        )
+      })} 
+  </div>
+ </div>
+  
+  </>
   );
 };
 
