@@ -40,6 +40,9 @@
 
 .url {
   width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .flagContainer {

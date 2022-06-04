@@ -1,27 +1,34 @@
 import styled from "styled-components"
-import { SelectedFlag } from "./popup"
 
-export const PopupWrapper = styled.div`
+export const PopupWrapper = styled.div<{ opinions: any }>`
     height: 400px;
     width: 300px;
     display: flex;
     align-items: center;
+    justify-content: ${({ opinions }) => !opinions && 'center' };
     row-gap: 1rem;
-    flex-direction: column;
+    flex-direction: ${({ opinions }) => opinions ? 'column' : 'row'};
     padding: 2rem;
     position: relative;
 
     p {
         display: flex;
         flex-direction: column;
+        
+        
+    }
+
+    code {
+            word-break: break-word;
+            white-space: pre;
     }
 `
 
-export const FlagWrapper = styled.div<{ selectedFlag: SelectedFlag }>`
+export const FlagWrapper = styled.div<{ selectedFlag: any }>`
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    background: ${({ selectedFlag }) => selectedFlag === "red" ? "url('redflag.png'), #f2514e" : selectedFlag === "green" ? "url('greenflag.png'), #6bd595" : "url('yellowflag.png'), #fc8d45"};
+    background: ${({ selectedFlag }) => selectedFlag === "red" ? "url('redflag.png'), #f2514e" : selectedFlag === "orange" ? "url('orangeflag.png'), #fc8d45"  : "url('greenflag.png'), #6bd595"}; 
     background-position: center;
     background-repeat: no-repeat;
     background-size: 60%;
