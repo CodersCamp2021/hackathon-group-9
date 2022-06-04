@@ -21,6 +21,9 @@ function Item({
 }: ItemProps) {
   return (
     <div className={styles.item}>
+      <div className={styles.flagContainer}>
+        <img className={styles.flag} src="red-flag.png" />
+      </div>
       <p className={styles.time}>{time}</p>
       <p className={styles.url}>{url}</p>
       <div className={styles.votesWrapper}>
