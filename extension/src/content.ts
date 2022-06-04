@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener(messageHandler);
 function messageHandler(message, sender, sendResponse) {
     console.log(message);
 
-    if (message.content === "show") {
+    if (message.showToast) {
         toast.style.display = "flex";
         reportsCount = message.upvotes;
     }
@@ -18,7 +18,7 @@ toast.classList.add("toast");
 toast.innerHTML = `
     <h3>WARNING! FAKE NEWS!</h3>
     <span class="circle">&#10071</span>
-    <p>${reportsCount} people have reported this site as sharing false information.</p>
+    <p>${reportsCount} people have reported this site to be spreading false information.</p>
     <button class="closing-button">&#10005</button>
 `
 
