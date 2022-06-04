@@ -1,21 +1,23 @@
 .item {
-  width: 60%;
+  width: 70%;
   height: 50px;
   border-radius: 10px;
   background-color: white;
   display: flex;
-  justify-content: space-around;
+  padding-left: 10px;
 }
 
 .votesWrapper {
   display: flex;
   gap: 10px;
   align-items: center;
+  width: 25%;
 }
 
 .vote {
   display: flex;
   align-items: center;
+  width: 50%;
 }
 
 .upVoteArrow {
@@ -31,9 +33,26 @@
   cursor: pointer;
 }
 
+.time {
+  width: 20%;
+  justify-content: center;
+}
+
 .url {
-  width: 250px;
+  width: 45%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.flagContainer {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flag {
+  height: 30px;
+  width: 30px;
 }

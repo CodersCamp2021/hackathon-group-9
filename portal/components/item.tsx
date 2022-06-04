@@ -7,6 +7,7 @@ type ItemProps = {
   url: string;
   upvotes: number;
   downvotes: number;
+  flag: string;
   onUpVote: VoidFunction;
   onDownVote: VoidFunction;
 };
@@ -16,11 +17,15 @@ function Item({
   url,
   upvotes,
   downvotes,
+  flag,
   onUpVote,
   onDownVote,
 }: ItemProps) {
   return (
     <div className={styles.item}>
+      <div className={styles.flagContainer}>
+        <img className={styles.flag} src={`${flag}-flag.png`} />
+      </div>
       <p className={styles.time}>{time}</p>
       <p className={styles.url}>{url}</p>
       <div className={styles.votesWrapper}>

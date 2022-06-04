@@ -11,6 +11,7 @@ import { getPages } from "../services";
 
 type Page = Omit<DBPage, "createdAt"> & {
   createdAt: string;
+  flag: string;
 };
 
 const Home = () => {
@@ -106,7 +107,10 @@ const Home = () => {
       <div className={styles.items}>
         <div className={styles.itemContainer}>
           {items
-            .sort((a, b) => Number(new Date(b.createdAt)) - Number(new Date(a.createdAt)))
+            .sort(
+              (a, b) =>
+                Number(new Date(b.createdAt)) - Number(new Date(a.createdAt))
+            )
             .map((el) => {
               return (
                 <div className={styles.itemWrapper} key={el.url}>
@@ -121,6 +125,7 @@ const Home = () => {
                     url={el.url}
                     upvotes={el.upvotes}
                     downvotes={el.downvotes}
+                    flag={el.flag}
                   ></Item>
                 </div>
               );
