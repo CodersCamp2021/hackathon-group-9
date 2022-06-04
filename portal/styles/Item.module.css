@@ -1,0 +1,32 @@
+.item {
+  width: 60%;
+  height: 50px;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.votesWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.vote {
+  display: flex;
+  align-items: center;
+}
+
+.upVoteArrow {
+  color: green;
+}
+.downVoteArrow {
+  color: red;
+}
+
+.voteBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
