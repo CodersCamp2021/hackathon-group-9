@@ -1,6 +1,6 @@
 .items {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   background-color: #f2f2f2;
@@ -71,6 +71,7 @@
 
 .header {
   text-align: center;
+  color: #9B9C9B;
 }
 
 .btnContainer {
@@ -78,4 +79,15 @@
   display: flex;
   justify-content: center;
   margin: 20px 0;
+}
+
+.flag {
+  height: 70px;
+  width: 70px;
+}
+
+.flagContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px
 }
