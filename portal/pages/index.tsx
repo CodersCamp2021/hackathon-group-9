@@ -70,6 +70,9 @@ const Home = () => {
   return (
     <>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <div className={styles.flagContainer}>
+          <img className={styles.flag} src="big-red-flag.png" />
+        </div>
         <h1 className={styles.header}>Report a website</h1>
         <TextField
           fullWidth
@@ -90,7 +93,7 @@ const Home = () => {
         </div>
         <div className={styles.searchContainer}>
           <button className={styles.plusBtn} onClick={() => setIsOpen(true)}>
-            <Icon icon="akar-icons:circle-plus-fill" className={styles.addIcon} />
+            <img className={styles.addButton} src='add-button.png' />
           </button>
           <Box
             sx={{
