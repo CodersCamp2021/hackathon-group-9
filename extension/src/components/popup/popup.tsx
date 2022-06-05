@@ -1,4 +1,4 @@
-import { PopupWrapper, FlagWrapper, ArrowsWrapper ,Footer } from "./popup.styled";
+import { PopupWrapper, FlagWrapper, ArrowsWrapper ,Footer, LoadingWrapper } from "./popup.styled";
 import { useState, useEffect } from "react";
 import  { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { Button } from "@nextui-org/react";
@@ -102,7 +102,10 @@ const Popup = () => {
                         </Button>
                 </Footer>
             </> : 
-            <Button onClick={addingDomainHandler}>Add current domain!</Button>
+            <LoadingWrapper>
+                <img src="logo.png" alt="logo image" />
+                <Button onClick={addingDomainHandler}>Add current domain!</Button>
+            </LoadingWrapper>
             }
         </PopupWrapper>
     )
