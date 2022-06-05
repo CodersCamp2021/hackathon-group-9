@@ -41,8 +41,7 @@ const Popup = () => {
                 active: true,
                 currentWindow: true,
               });
-
-              setCurrentDomain(tab.url)
+              setCurrentDomain(tab.url[tab.url.length-1] === '/' ? [...tab.url].splice(0, tab.url.length-1).join('') : tab.url)
         };
 
         fetchData();
