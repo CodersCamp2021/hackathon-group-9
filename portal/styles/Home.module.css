@@ -2,6 +2,9 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  background-color: #f2f2f2;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .itemContainer {
@@ -10,7 +13,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: lightgrey;
+  background-color: white;
   gap: 10px;
   padding: 10px;
   border-radius: 10px;

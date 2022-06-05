@@ -21,8 +21,18 @@ function Item({
   onUpVote,
   onDownVote,
 }: ItemProps) {
+  let backgroundColor = 'white';
+  if (flag === 'red') {
+    backgroundColor = '#fad7d7'
+  }
+  if (flag === 'orange') {
+    backgroundColor = '#fcf2eb'
+  }
+  if (flag === 'green') {
+    backgroundColor = '#d9fae6'
+  }
   return (
-    <div className={styles.item}>
+    <div className={styles.item} style={{ backgroundColor: backgroundColor}} >
       <div className={styles.flagContainer}>
         <img className={styles.flag} src={`${flag}-flag.png`} />
       </div>
