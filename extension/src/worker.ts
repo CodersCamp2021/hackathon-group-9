@@ -12,44 +12,51 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
   console.log("[SW] chrome.webNavigation.onCompleted", details.url);
   const data = await fetchAPI(details.url);
   console.log("[SW] chrome.webNavigation.onCompleted", data);
-  const response = await fetch("https://earnest-palmier-0fac39.netlify.app/api/pages");
+  const response = await fetch("https://fake-alert.netlify.app/api/pages");
   const urlList = await response.json();
-  
 
-  if (data !== null && typeof data === "object" ) {
-    console.log("🚀 ~ file: worker.ts ~ line 20 ~ chrome.webNavigation.onCompleted.addListener ~ urlList", urlList)
+  if (data !== null && typeof data === "object") {
+    console.log(
+      "🚀 ~ file: worker.ts ~ line 20 ~ chrome.webNavigation.onCompleted.addListener ~ urlList",
+      urlList
+    );
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       const msg = {
-        data: JSON.stringify(urlList)
-      }
-      if (message === 'get-domain-list') {
+        data: JSON.stringify(urlList),
+      };
+      if (message === "get-domain-list") {
         sendResponse(msg);
       }
     });
 
-    if (data.flag === "green") return
+    if (data.flag === "green") return;
 
-    const injectToast = data.flag === "red" ? injectRedToast : injectOrangeToast;
+    const injectToast =
+      data.flag === "red" ? injectRedToast : injectOrangeToast;
 
     chrome.scripting.executeScript({
       target: {
         tabId: details.tabId,
       },
-      func: injectToast
-    })
+      func: injectToast,
+    });
   }
 });
 
 async function fetchAPI(pageUrl: string) {
-  const encodedUrl = encodeURIComponent(pageUrl[pageUrl.length-1] === '/' ? [...pageUrl].splice(0, pageUrl.length-1).join('') : pageUrl);
-  const url = `https://earnest-palmier-0fac39.netlify.app/api/pages/${encodedUrl}`;
+  const encodedUrl = encodeURIComponent(
+    pageUrl[pageUrl.length - 1] === "/"
+      ? [...pageUrl].splice(0, pageUrl.length - 1).join("")
+      : pageUrl
+  );
+  const url = `https://fake-alert.netlify.app/api/pages/${encodedUrl}`;
   const response = await fetch(url);
-  
+
   if (response.ok) {
-    return await response.json()
+    return await response.json();
   }
 
-  return null
+  return null;
 }
 
 function injectRedToast() {
@@ -60,7 +67,7 @@ function injectRedToast() {
       <span class="circle">&#10071</span>
       <p>This site contains false information and cannot be trusted!</p>
       <button class="closing-button">&#10005</button>
-  `
+  `;
 
   document.body.append(toast);
 
@@ -107,14 +114,16 @@ function injectRedToast() {
           background-color: inherit;
           cursor: pointer;
       }
-  `
+  `;
   const styleElement = `<style>${styles}</style>`;
   document.head.insertAdjacentHTML("beforeend", styleElement);
 
-  toast.querySelector(".closing-button").addEventListener("click", hideToastHandler);
+  toast
+    .querySelector(".closing-button")
+    .addEventListener("click", hideToastHandler);
 
   function hideToastHandler() {
-      toast.style.display = "none";
+    toast.style.display = "none";
   }
 }
 
@@ -126,7 +135,7 @@ function injectOrangeToast() {
       <span class="circle">&#10071</span>
       <p>This site might contain false information. Be careful!</p>
       <button class="closing-button">&#10005</button>
-  `
+  `;
 
   document.body.append(toast);
 
@@ -173,15 +182,15 @@ function injectOrangeToast() {
           background-color: inherit;
           cursor: pointer;
       }
-  `
+  `;
   const styleElement = `<style>${styles}</style>`;
   document.head.insertAdjacentHTML("beforeend", styleElement);
 
-  toast.querySelector(".closing-button").addEventListener("click", hideToastHandler);
+  toast
+    .querySelector(".closing-button")
+    .addEventListener("click", hideToastHandler);
 
   function hideToastHandler() {
-      toast.style.display = "none";
+    toast.style.display = "none";
   }
 }
-
-
