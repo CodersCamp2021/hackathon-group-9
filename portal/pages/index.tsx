@@ -85,23 +85,28 @@ const Home = () => {
       </Modal>
 
       <div className={styles.container}>
-        <button className={styles.plusBtn} onClick={() => setIsOpen(true)}>
-          <Icon icon="akar-icons:circle-plus-fill" className={styles.addIcon} />
-        </button>
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-          }}
-        >
-          <TextField
-            fullWidth
-            label="Search"
-            id="fullWidth"
-            onChange={(e) => setWebUrl(e.target.value)}
-            type="url"
-          />
-        </Box>
+        <div className={styles.logoContainer}>
+          <img className={styles.logo} src='logo.png' />
+        </div>
+        <div className={styles.searchContainer}>
+          <button className={styles.plusBtn} onClick={() => setIsOpen(true)}>
+            <Icon icon="akar-icons:circle-plus-fill" className={styles.addIcon} />
+          </button>
+          <Box
+            sx={{
+              width: 500,
+              maxWidth: "100%",
+            }}
+          >
+            <TextField
+              fullWidth
+              label="Search"
+              id="fullWidth"
+              onChange={(e) => setWebUrl(e.target.value)}
+              type="url"
+            />
+          </Box>
+        </div>
       </div>
 
       <div className={styles.items}>

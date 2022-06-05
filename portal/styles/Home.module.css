@@ -9,7 +9,7 @@
 }
 
 .itemContainer {
-  width: 65%;
+  width: 70%;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -26,10 +26,28 @@
 
 .container {
   width: 100%;
+  display: flex;
+}
+
+.logoContainer {
+  width: 15%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.logo {
+  width: 125px;
+  height: 50px;
+}
+
+.searchContainer {
+  width: 85%;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 15%;
 }
 
 .itemWrapper {
