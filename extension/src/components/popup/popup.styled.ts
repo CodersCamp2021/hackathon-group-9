@@ -63,4 +63,15 @@ export const ArrowsWrapper = styled.div`
     }
 `
 
+export const LoadingWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+
+    img {
+        width: 100%;
+        transform: translateX(50px) scale(1.3);
+    }
+`
+
 

@@ -1,4 +1,4 @@
-import { PopupWrapper, FlagWrapper, ArrowsWrapper ,Footer } from "./popup.styled";
+import { PopupWrapper, FlagWrapper, ArrowsWrapper ,Footer, LoadingWrapper } from "./popup.styled";
 import { useState, useEffect } from "react";
 import  { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { Button } from "@nextui-org/react";
@@ -41,8 +41,7 @@ const Popup = () => {
                 active: true,
                 currentWindow: true,
               });
-
-              setCurrentDomain(tab.url)
+              setCurrentDomain(tab.url[tab.url.length-1] === '/' ? [...tab.url].splice(0, tab.url.length-1).join('') : tab.url)
         };
 
         fetchData();
@@ -102,7 +101,10 @@ const Popup = () => {
                         </Button>
                 </Footer>
             </> : 
-            <Button onClick={addingDomainHandler}>Add current domain!</Button>
+            <LoadingWrapper>
+                <img src="logo.png" alt="logo image" />
+                <Button onClick={addingDomainHandler}>Add current domain!</Button>
+            </LoadingWrapper>
             }
         </PopupWrapper>
     )
