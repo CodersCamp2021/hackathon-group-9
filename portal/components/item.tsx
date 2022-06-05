@@ -21,8 +21,18 @@ function Item({
   onUpVote,
   onDownVote,
 }: ItemProps) {
+  let backgroundColor = 'white';
+  if (flag === 'red') {
+    backgroundColor = '#fad7d7'
+  }
+  if (flag === 'orange') {
+    backgroundColor = '#fcf2eb'
+  }
+  if (flag === 'green') {
+    backgroundColor = '#d9fae6'
+  }
   return (
-    <div className={styles.item}>
+    <div className={styles.item} style={{ backgroundColor: backgroundColor}} >
       <div className={styles.flagContainer}>
         <img className={styles.flag} src={`${flag}-flag.png`} />
       </div>
@@ -31,16 +41,13 @@ function Item({
       <div className={styles.votesWrapper}>
         <div className={styles.vote}>
           <button className={styles.voteBtn} onClick={onUpVote}>
-            <Icon icon="cil:arrow-thick-top" className={styles.upVoteArrow} />
+            <img className={styles.arrow} src="arrow-up-vote.png" />
           </button>
           <p className={styles.upvotes}>{upvotes}</p>
         </div>
         <div className={styles.vote}>
           <button className={styles.voteBtn} onClick={onDownVote}>
-            <Icon
-              icon="cil:arrow-thick-bottom"
-              className={styles.downVoteArrow}
-            />
+          <img className={styles.arrow} src="arrow-down-vote.png" />
           </button>
           <p className={styles.downvotes}>{downvotes}</p>
         </div>
